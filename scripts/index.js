@@ -1,9 +1,17 @@
-// Importamos el deckDict del fichero constants.js
-// Importamos el fichero constants.js
-import { decksDict } from "./constants/constants.js"
-import { Deck } from "./classes/Deck.js"
+import { Deck } from "./classes/Deck.js";
 
-let languaje = "en";
+// Función para reproducir un texto con voz
+const speakText = (text) => {
+  if ("speechSynthesis" in window) {
+    const synthesis = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    synthesis.speak(utterance);
+  } else {
+    console.log("El navegador no admite la síntesis de voz.");
+  }
+};
+
+let languaje = "es";
 let deckType = "spanish";
 let autoPass = false;
 let autoPassPeriod = 2000;
@@ -13,7 +21,7 @@ const restartButton = document.querySelector("#restart-button");
 const passButton = document.querySelector("#pass-button");
 const autoPassButton = document.querySelector("#auto-pass-button");
 
-const deck = new Deck(deckType, languaje);
+const deck = new Deck(deckType, languaje, speakText);
 
 passButton.addEventListener("click", () => {
   deck.pass();

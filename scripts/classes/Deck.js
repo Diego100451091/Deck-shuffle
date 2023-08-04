@@ -1,13 +1,14 @@
 import { decksDict } from "../constants/constants.js";
 
 export class Deck {
-  constructor(type, languaje) {
+  constructor(type, languaje, speakText) {
     this.cards = this.suffle(decksDict[type].list);
     this.leftCardsCounter = this.cards.length;
     this.passedCards = [];
     this.currentCard = null;
     this.type = type;
     this.languaje = languaje;
+    this.speakText = speakText;
 
     this.render();
   }
@@ -30,6 +31,7 @@ export class Deck {
       this.currentCard = newCard;
       this.leftCardsCounter -= 1;
       this.render();
+      await this.speakText(newCard.name[this.languaje]);
       return true;
     } else {
       return false;
