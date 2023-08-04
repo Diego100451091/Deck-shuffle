@@ -23,15 +23,16 @@ export class Deck {
     return suffledDeck;
   };
 
-  pass = () => {
+  pass = async () => {
     const newCard = this.cards.pop();
     if (newCard) {
       this.passedCards.push(this.currentCard);
       this.currentCard = newCard;
       this.leftCardsCounter -= 1;
       this.render();
+      return true;
     } else {
-      console.log("deck finished");
+      return false;
     }
   };
 
