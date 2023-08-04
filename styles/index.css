@@ -56,8 +56,11 @@
 
 .green-background-pattern {
   background-color: #30633d;
-  background-image:  linear-gradient(135deg, #276536 25%, transparent 25%), linear-gradient(225deg, #276536 25%, transparent 25%), linear-gradient(45deg, #276536 25%, transparent 25%), linear-gradient(315deg, #276536 25%, #30633d 25%);
-  background-position:  4px 0, 4px 0, 0 0, 0 0;
+  background-image: linear-gradient(135deg, #276536 25%, transparent 25%),
+    linear-gradient(225deg, #276536 25%, transparent 25%),
+    linear-gradient(45deg, #276536 25%, transparent 25%),
+    linear-gradient(315deg, #276536 25%, #30633d 25%);
+  background-position: 4px 0, 4px 0, 0 0, 0 0;
   background-size: 4px 4px;
   background-repeat: repeat;
 }
@@ -92,7 +95,9 @@ header {
     var(--color-bg-header) 95%,
     transparent 100%
   );
+}
 
+header > h1 {
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-text);
@@ -101,7 +106,7 @@ header {
 #main {
   margin-top: 4rem;
   min-height: calc(100dvh - 4rem);
-  max-width: 600px;
+  max-width: 700px;
   width: 100%;
 
   display: flex;
@@ -112,7 +117,7 @@ header {
   padding: 2rem 2rem;
 }
 
-button {
+.action-button {
   position: relative;
   display: block;
 
@@ -135,7 +140,7 @@ button {
   transition: all 0.1s ease-in-out;
 }
 
-button:active {
+.action-button:active {
   transform: translateY(0.3rem);
   box-shadow: var(--color-shadow-buttton) 0 0 0 0;
 }
@@ -147,9 +152,11 @@ button:active {
   gap: 1.5rem;
 }
 
-#decks-container {
+#deck-section {
+  width: 100%;
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
@@ -166,11 +173,21 @@ button:active {
   text-align: center;
 }
 
+#decks-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
 #showed-cards {
   position: relative;
   width: calc(var(--card-width) + 2rem);
   height: calc(var(--card-height) + 2rem);
 }
+
 #showed-cards > .card-container:first-child {
   position: absolute;
   top: 0;
@@ -241,13 +258,60 @@ button:active {
   border-radius: 10px;
 }
 
+
+
 #auto-pass-interval {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
   color: var(--color-text);
 }
+
+#auto-pass-interval > .auto-pass-input-container {
+    height: 1.8rem;
+    display: grid;
+    grid-template-columns: 1.8rem 1fr 1.8rem;
+
+    border: 2px solid var(--dark-primary-color);
+    border-radius: 5px;
+    background-color: white;
+}
+
+#auto-pass-interval > .auto-pass-input-container > button {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0.8rem;
+
+    border: none;
+    background: transparent;
+
+    transition: all .5s;
+}
+
+#auto-pass-interval > .auto-pass-input-container > button:hover {
+    opacity: 0.75;
+}
+
+#auto-pass-interval > .auto-pass-input-container > input {
+    height: 100%;
+    width: 100%;
+
+    border: none;
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
+    background: transparent;
+
+    text-align: center;
+}
+
+
 
 /* Mediascreen mobile */
 @media screen and (max-width: 500px) {
@@ -264,5 +328,12 @@ button:active {
     height: calc(var(--card-width) + 2rem);
     transform: rotateZ(90deg) translateY(2rem) translateX(-1rem);
     transform-origin: center;
+  }
+}
+
+/* Mediascreen desktop */
+@media only screen and (min-width: 1024px) {
+  :root {
+    --card-scale: 1.5;
   }
 }

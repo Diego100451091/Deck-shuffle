@@ -7,47 +7,72 @@
         content="width=device-width, initial-scale=1.0">
     <title>Deck shuffle</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body class="green-background-pattern">
-    <header>Deck shuffle</header>
+    <header>
+        <h1>Deck shuffle</h1>
+    </header>
 
     <main id="main">
-        <div id="decks-container">
+        <section id="deck-section">
             <div id="remaining-cards-counter">
                 <span id="remaining-cards-counter-number">40</span>
                 cards remaining
             </div>
-            <div id="showed-cards">
-                <div class="card-container">
-                    <img id="previous-card" src=""
-                        alt="previous-card">
+            <div id="decks-container">
+                <div id="showed-cards">
+                    <div class="card-container">
+                        <img id="previous-card" src=""
+                            alt="previous-card">
+                    </div>
+                    <div class="card-container">
+                        <img id="current-card" src=""
+                            alt="current-card">
+                    </div>
                 </div>
-                <div class="card-container">
-                    <img id="current-card" src="" alt="current-card">
+                <div id="remaining-deck">
                 </div>
             </div>
-            <div id="remaining-deck">
-            </div>
-        </div>
+        </section>
 
-        <div class="buttons-container">
-            <button id="pass-button">
+        <section class="buttons-container">
+            <button id="pass-button" class="action-button">
                 Pass
             </button>
-            <button id="restart-button">
+            <button id="restart-button" class="action-button">
                 Restart
             </button>
             <div id="auto-pass-interval">
-                <label for="auto-pass-interval">Auto pass interval (ms)</label>
-                <input type="number" id="auto-pass-interval-input" value="1000" step="100" min="500" max="5000" 
-                    oninput="this.value = Math.round(this.value / 100) * 100"
-                >
-            </div>
-            <button id="auto-pass-button">
+                <label for="auto-pass-interval">Auto pass interval
+                    (ms)</label>
+                <div class="auto-pass-input-container">
+                  <button
+                    type="button"
+                    class="minus-button transition hover:opacity-75"
+                  >
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <input type="number" id="auto-pass-interval-input"
+                    value="2000" step="500" min="2000" max="5000"
+                    oninput="this.value = Math.round(this.value / 500) * 500"
+                    >
+              
+                  <button
+                    type="button"
+                    class="plus-button w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                  >
+                  <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+            <button id="auto-pass-button" class="action-button">
                 Start auto pass
             </button>
-        </div>
+        </section>
     </main>
     <script src="./scripts/index.js" type="module"></script>
 </body>
