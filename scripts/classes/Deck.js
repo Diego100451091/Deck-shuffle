@@ -70,6 +70,10 @@ export class Deck {
       currentCard.style.opacity = "0";
     }
 
+    this._renderLeftDeck();
+  };
+
+  _renderLeftDeck = () => {
     const leftCardsCounterSpan = document.querySelector(
       "#remaining-cards-counter-number"
     );
@@ -87,7 +91,7 @@ export class Deck {
       cardReverseItem.key = `reverse-card-${i}`;
       leftCardsContainer.appendChild(cardReverseItem);
     }
-  };
+  }
 
   cleanRender = () => {
     const previousCard = document.querySelector("#previous-card");
@@ -99,6 +103,7 @@ export class Deck {
     previousCard.style.opacity = "0";
     currentCard.style.opacity = "0";
     leftCardsCounterSpan.innerHTML = this.leftCardsCounter;
+    this._renderLeftDeck();
   }
 
   reset = () => {
