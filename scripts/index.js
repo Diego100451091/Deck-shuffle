@@ -6,8 +6,8 @@ let isVoiceActive = true;
 const speakText = (text) => {
   if (synthesis) {
     if (isVoiceActive) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    synthesis.speak(utterance);
+      const utterance = new SpeechSynthesisUtterance(text);
+      synthesis.speak(utterance);
     }
   } else {
     console.log("El navegador no admite la síntesis de voz.");
@@ -19,7 +19,6 @@ let deckType = "spanish";
 let autoPass = false;
 let autoPassPeriod = 2000;
 let intervalAutoPassId = null;
-let currentTheme = "green";
 let isMenuOpened = false;
 
 const restartButton = document.querySelector("#restart-button");
@@ -65,13 +64,12 @@ autoPassIntervalInput.addEventListener("change", () => {
   updateAutoPassPeriod();
 });
 
-// Observe changes in theme selector
-form.addEventListener("change", () => {
-  updateColorTheme();
-});
+
 
 menuButton.addEventListener("click", () => {
   toggleMenuOpened();
+});
+
 voiceButton.addEventListener("click", () => {
   updateVoiceSpeechActive();
 });
@@ -101,42 +99,24 @@ const updateAutoPassPeriod = () => {
   }
 };
 
-const updateColorTheme = () => {
-  const variables = ["", "dark-", "light-"];
-  const selectedThemeInput = form.querySelector('input[name="theme"]:checked');
-  const selectedTheme = selectedThemeInput.value;
-
-  // Check if the theme has changed
-  if (selectedTheme === currentTheme) return; 
-
-  // Update the colors
-  for (let variable of variables) {
-    document.documentElement.style.setProperty(
-      `--${variable}primary-color`,
-      `var(--palette-${variable}${selectedTheme})`
-    );
-  }
-  // Update the background
-  document.body.classList.toggle(`${currentTheme}-background-pattern`);
-  document.body.classList.toggle(`${selectedTheme}-background-pattern`);
-
-  // Save value into localStorage 
-  localStorage.setItem("theme", selectedTheme);
-  // Set the theme variable to the new theme
-  currentTheme = selectedTheme;
-  
-}
 
 const toggleMenuOpened = () => {
   isMenuOpened = !isMenuOpened;
-  console.log(menuContainer)
-  if (isMenuOpened){
-    console.log("open")
+  if (isMenuOpened) {
     menuContainer.classList.add("opened");
+    menuButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
     return;
   }
-
+  
   menuContainer.classList.remove("opened");
+  menuButton.innerHTML = `<i class="fa-solid fa-sliders"></i>`;
+};
+
+const updateVoiceSpeechActive = () => {
+  isVoiceActive = voiceButton.checked;
+  localStorage.setItem("voiceSpeechActive", isVoiceActive);
+};
+
 
 
 const setInitialVoiceSpeech = () => {
