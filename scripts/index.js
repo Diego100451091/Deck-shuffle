@@ -17,6 +17,7 @@ let deckType = "spanish";
 let autoPass = false;
 let autoPassPeriod = 2000;
 let intervalAutoPassId = null;
+let currentTheme = "green";
 let isMenuOpened = false;
 
 const restartButton = document.querySelector("#restart-button");
@@ -31,6 +32,7 @@ const plusButton = inputContainer.querySelector(".plus-button");
 
 const menuButton = document.querySelector("#menu-button");
 const menuContainer = document.querySelector("#options-menu")
+const form = document.getElementById("color-theme-selector");
 
 const deck = new Deck(deckType, languaje, speakText);
 
@@ -60,6 +62,12 @@ plusButton.addEventListener("click", () => {
 autoPassIntervalInput.addEventListener("change", () => {
   updateAutoPassPeriod();
 });
+
+// Observe changes in theme selector
+form.addEventListener("change", () => {
+  updateColorTheme();
+});
+
 menuButton.addEventListener("click", () => {
   toggleMenuOpened();
 })
@@ -89,6 +97,32 @@ const updateAutoPassPeriod = () => {
   }
 };
 
+const updateColorTheme = () => {
+  const variables = ["", "dark-", "light-"];
+  const selectedThemeInput = form.querySelector('input[name="theme"]:checked');
+  const selectedTheme = selectedThemeInput.value;
+
+  // Check if the theme has changed
+  if (selectedTheme === currentTheme) return; 
+
+  // Update the colors
+  for (let variable of variables) {
+    document.documentElement.style.setProperty(
+      `--${variable}primary-color`,
+      `var(--palette-${variable}${selectedTheme})`
+    );
+  }
+  // Update the background
+  document.body.classList.toggle(`${currentTheme}-background-pattern`);
+  document.body.classList.toggle(`${selectedTheme}-background-pattern`);
+
+  // Save value into localStorage 
+  localStorage.setItem("theme", selectedTheme);
+  // Set the theme variable to the new theme
+  currentTheme = selectedTheme;
+  
+}
+
 const toggleMenuOpened = () => {
   isMenuOpened = !isMenuOpened;
   console.log(menuContainer)
@@ -100,3 +134,17 @@ const toggleMenuOpened = () => {
 
   menuContainer.classList.remove("opened");
 }
+
+const setInitialTheme = () => {
+  // Get the theme from localStorage
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    // Set the theme
+    const themeInput = form.querySelector(`input[value="${savedTheme}"]`);
+    themeInput.checked = true;
+    updateColorTheme();
+  }
+}
+
+// Execute initial methods
+setInitialTheme();
