@@ -20,6 +20,12 @@
         <aside id="options-menu">
             <ul>
                 <li class="menu-option">
+                    <h3>Deck type: </h3>
+                    <select id="deck-selector">
+                        <option value="spanish" selected>Spanish</option>
+                    </select>
+                </li>
+                <li class="menu-option">
                     <h3>Theme:</h3>
                     <form id="color-theme-selector">
                         <div class="color-theme-option">
@@ -34,6 +40,14 @@
                             <label for="color-theme-magenta">Magenta</label>
                             <input id="color-theme-magenta" type="radio" name="theme" value="magenta">
                     </form>
+                </li>
+                <li class="menu-option">
+                    <h3>Voice speech:</h3>
+                    <div id="voice-speech-input-container">
+                        <label>Disabled</label>
+                        <input type="checkbox" id="voice-speech-input" class="rounded-slider-checkbox">
+                        <label>Enabled</label>
+                    </div>
                 </li>
             </ul>
         </aside>
@@ -79,7 +93,7 @@
                     value="2.0" step="0.5" min="2.0" max="5.0"
                     oninput="this.value = Math.round(this.value*10 / 5)/2"
                     disabled
-                    >
+                   >
               
                   <button
                     type="button"
@@ -101,6 +115,7 @@
             
         </section>
     </main>
+    <script src="./scripts/theme.js" type="module"></script>
     <script src="./scripts/index.js" type="module"></script>
 </body>
 

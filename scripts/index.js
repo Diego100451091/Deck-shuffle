@@ -1,12 +1,14 @@
 import { Deck } from "./classes/Deck.js";
 
 const synthesis = "speechSynthesis" in window ? window.speechSynthesis : null;
+let isVoiceActive = true;
 
-// Función para reproducir un texto con voz
 const speakText = (text) => {
   if (synthesis) {
+    if (isVoiceActive) {
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);
+    }
   } else {
     console.log("El navegador no admite la síntesis de voz.");
   }
@@ -31,8 +33,8 @@ const minusButton = inputContainer.querySelector(".minus-button");
 const plusButton = inputContainer.querySelector(".plus-button");
 
 const menuButton = document.querySelector("#menu-button");
-const menuContainer = document.querySelector("#options-menu")
-const form = document.getElementById("color-theme-selector");
+const menuContainer = document.querySelector("#options-menu");
+const voiceButton = document.querySelector("#voice-speech-input");
 
 const deck = new Deck(deckType, languaje, speakText);
 
@@ -70,7 +72,9 @@ form.addEventListener("change", () => {
 
 menuButton.addEventListener("click", () => {
   toggleMenuOpened();
-})
+voiceButton.addEventListener("click", () => {
+  updateVoiceSpeechActive();
+});
 
 const setAutoPass = async (value) => {
   autoPass = value;
@@ -133,18 +137,23 @@ const toggleMenuOpened = () => {
   }
 
   menuContainer.classList.remove("opened");
-}
 
-const setInitialTheme = () => {
-  // Get the theme from localStorage
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    // Set the theme
-    const themeInput = form.querySelector(`input[value="${savedTheme}"]`);
-    themeInput.checked = true;
-    updateColorTheme();
+
+const setInitialVoiceSpeech = () => {
+  isVoiceActive = localStorage.getItem("voiceSpeechActive");
+  if (isVoiceActive === null) {
+    isVoiceActive = true;
+  } else if (isVoiceActive === "false") {
+    isVoiceActive = false;
+  } else {
+    isVoiceActive = true;
   }
-}
+  voiceButton.checked = isVoiceActive;
+};
+
+const setInitialOptions = () => {
+  setInitialVoiceSpeech();
+};
 
 // Execute initial methods
-setInitialTheme();
+setInitialOptions();
