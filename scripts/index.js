@@ -40,6 +40,7 @@ passButton.addEventListener("click", () => {
 
 restartButton.addEventListener("click", () => {
   deck.reset();
+  setAutoPass(false);
 });
 
 autoPassButton.addEventListener("click", () => {
@@ -67,18 +68,21 @@ const setAutoPass = async (value) => {
   autoPass = value;
   if (autoPass) {
     autoPassButton.innerHTML = "Stop auto pass";
+    autoPassButton.classList.add("active");
     intervalAutoPassId = setTimeout(async () => {
       setAutoPass(await deck.pass());
     }, autoPassPeriod);
   } else {
     autoPassButton.innerHTML = "Start auto pass";
+    autoPassButton.classList.remove("active");
     clearInterval(intervalAutoPassId);
   }
 };
 
 const updateAutoPassPeriod = () => {
-  console.log(autoPassIntervalInput.value)
-  autoPassPeriod = autoPassIntervalInput.value;
+  // Get the new period
+  autoPassPeriod = Math.round(autoPassIntervalInput.value * 1000);
+  // Restart the autopass process
   if (autoPass) {
     setAutoPass(false);
     setAutoPass(true);
