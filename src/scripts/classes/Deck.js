@@ -1,6 +1,6 @@
 import { decksDict } from "../constants/constants.js";
 
-export class Deck {
+class Deck {
   constructor(type, language, speakText) {
     this.cards = this.suffle(decksDict[type].list);
     this.leftCardsCounter = this.cards.length;
@@ -35,6 +35,7 @@ export class Deck {
       await this.speakText(newCard.name[this.language]);
       return true;
     } else {
+      await this.speakText(this.language == "es" ? "Baraja terminada" : "Deck finished");
       return false;
     }
   };
@@ -61,8 +62,8 @@ export class Deck {
 
           if (this.passedCards.length > 1) {
             previousCard.src = `assets/${
-                this.passedCards[this.passedCards.length - 1].image
-              }`;
+              this.passedCards[this.passedCards.length - 1].image
+            }`;
             previousCard.style.opacity = "1";
           } else {
             previousCard.style.opacity = "0";
@@ -96,41 +97,44 @@ export class Deck {
 
       if (i === this.leftCardsCounter - 1) {
         cardReverseItem.id = "last-reverse-card";
-        cardReverseItem.addEventListener("click", () => this.pass())
+        cardReverseItem.addEventListener("click", () => this.pass());
       }
     }
-  }
+  };
 
   cleanRender = () => {
     const previousCard = document.querySelector("#previous-card");
     const currentCard = document.querySelector("#current-card");
     const leftCardsCounterSpan = document.querySelector(
-        "#remaining-cards-counter-number"
-        );
+      "#remaining-cards-counter-number"
+    );
 
     previousCard.style.opacity = "0";
     currentCard.style.opacity = "0";
     leftCardsCounterSpan.innerHTML = this.leftCardsCounter;
     this._renderLeftDeck();
-  }
+  };
 
-  appendCardToHistory = (card) =>{
-    const previousCardsContainer = document.querySelector("#previous-cards-list");
+  appendCardToHistory = (card) => {
+    const previousCardsContainer = document.querySelector(
+      "#previous-cards-list"
+    );
     const cardItem = document.createElement("img");
-    cardItem.classList = "small-previous-card"
+    cardItem.classList = "small-previous-card";
     cardItem.src = `assets/${card.image}`;
     cardItem.alt = card.name[this.language];
     cardItem.key = `card-${card.name[this.language]}`;
     previousCardsContainer.appendChild(cardItem);
-  }
+  };
 
   cleanPassedCards = () => {
-    const previousCardsContainer = document.querySelector("#previous-cards-list");
+    const previousCardsContainer = document.querySelector(
+      "#previous-cards-list"
+    );
     previousCardsContainer.innerHTML = "";
-  }
+  };
 
   reset = async () => {
-    console.log(this.type, decksDict[this.type])
     this.cards = this.suffle(decksDict[this.type].list);
     this.passedCards = [];
     this.cleanPassedCards();
@@ -148,3 +152,5 @@ export class Deck {
     this.reset();
   };
 }
+
+export default Deck;
