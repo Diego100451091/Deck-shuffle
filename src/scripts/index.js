@@ -109,7 +109,7 @@ const togglePreviousCardsAsideOpened = () => {
   }
 
   previousCardsAside.classList.remove("opened");
-  previousCardsAsideButton.innerHTML = `<img src="assets/cards-icon.svg" alt="cards icon">`;
+  previousCardsAsideButton.innerHTML = `<img src="src/assets/cards-icon.svg" alt="cards icon">`;
 };
 
 
