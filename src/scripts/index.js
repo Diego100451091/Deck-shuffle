@@ -36,6 +36,7 @@ const menuButton = document.querySelector("#menu-button");
 const menuContainer = document.querySelector("#options-menu");
 const voiceButton = document.querySelector("#voice-speech-input");
 const languageSelector = document.querySelector("#language-selector");
+const dekcSelector = document.querySelector("#deck-selector");
 
 const previousCardsAsideButton = document.querySelector("#previous-cards-button")
 const previousCardsAside = document.querySelector("#previous-cards-aside");
@@ -83,8 +84,15 @@ voiceButton.addEventListener("click", () => {
 
 languageSelector.addEventListener("change", () => {
   language = languageSelector.value;
+  localStorage.setItem("languageSelected", language);
   deck.setLanguage(language);
-})
+});
+
+dekcSelector.addEventListener("change", () => {
+  deckType = dekcSelector.value;
+  localStorage.setItem("deckSelected", deckType);
+  deck.setType(deckType);
+});
 
 const setAutoPass = async (value) => {
   autoPass = value;
@@ -135,29 +143,32 @@ const togglePreviousCardsAsideOpened = () => {
   previousCardsAsideButton.innerHTML = `<img src="assets/cards-icon.svg" alt="cards icon">`;
 }
 
-
-
 const updateVoiceSpeechActive = () => {
   isVoiceActive = voiceButton.checked;
   localStorage.setItem("voiceSpeechActive", isVoiceActive);
 };
 
-
-
 const setInitialVoiceSpeech = () => {
-  isVoiceActive = localStorage.getItem("voiceSpeechActive");
-  if (isVoiceActive === null) {
-    isVoiceActive = true;
-  } else if (isVoiceActive === "false") {
-    isVoiceActive = false;
-  } else {
-    isVoiceActive = true;
-  }
+  isVoiceActive = (localStorage.getItem("voiceSpeechActive") ?? "true") === "true";
   voiceButton.checked = isVoiceActive;
 };
 
+const setInitialLanguage = () => {
+  language = localStorage.getItem("languageSelected") ?? language;
+  languageSelector.value = language;
+  deck.setLanguage(language);
+}
+
+const setInitialDeck = () => {
+  deckType = localStorage.getItem("deckSelected") ?? deckType;
+  dekcSelector.value = deckType;
+  deck.setType(deckType);
+}
+
 const setInitialOptions = () => {
   setInitialVoiceSpeech();
+  setInitialLanguage();
+  setInitialDeck();
 };
 
 // Execute initial methods

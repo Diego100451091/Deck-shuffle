@@ -88,7 +88,7 @@ export class Deck {
     for (let i = 0; i < this.leftCardsCounter; i++) {
       const offset = -i / 3;
       const cardReverseItem = document.createElement("img");
-      cardReverseItem.src = `assets/${decksDict[this.type].source}/reverse.jpg`;
+      cardReverseItem.src = `assets/${decksDict[this.type].reverse}`;
       cardReverseItem.alt = "reverse-card";
       cardReverseItem.style = `transform: translateX(${offset}px) translateY(${offset}px)`;
       cardReverseItem.key = `reverse-card-${i}`;
@@ -129,7 +129,8 @@ export class Deck {
     previousCardsContainer.innerHTML = "";
   }
 
-  reset = () => {
+  reset = async () => {
+    console.log(this.type, decksDict[this.type])
     this.cards = this.suffle(decksDict[this.type].list);
     this.passedCards = [];
     this.cleanPassedCards();
