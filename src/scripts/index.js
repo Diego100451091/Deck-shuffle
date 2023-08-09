@@ -1,21 +1,7 @@
-import { Deck } from "./classes/Deck.js";
+import Deck from "./classes/Deck.js";
+import Menu  from "./classes/Menu.js";
+import voiceSpeech from "./classes/VoiceSpeech.js";
 
-const synthesis = "speechSynthesis" in window ? window.speechSynthesis : null;
-let isVoiceActive = true;
-
-const speakText = (text) => {
-  if (synthesis) {
-    if (isVoiceActive) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      synthesis.speak(utterance);
-    }
-  } else {
-    console.log("El navegador no admite la síntesis de voz.");
-  }
-};
-
-let language = "es";
-let deckType = "spanish";
 let autoPass = false;
 let autoPassPeriod = 2000;
 let intervalAutoPassId = null;
@@ -34,14 +20,13 @@ const plusButton = inputContainer.querySelector(".plus-button");
 
 const menuButton = document.querySelector("#menu-button");
 const menuContainer = document.querySelector("#options-menu");
-const voiceButton = document.querySelector("#voice-speech-input");
-const languageSelector = document.querySelector("#language-selector");
-const dekcSelector = document.querySelector("#deck-selector");
 
-const previousCardsAsideButton = document.querySelector("#previous-cards-button")
+const previousCardsAsideButton = document.querySelector(
+  "#previous-cards-button"
+);
 const previousCardsAside = document.querySelector("#previous-cards-aside");
 
-const deck = new Deck(deckType, language, speakText);
+const deck = new Deck("spanish", "es", voiceSpeech.speakText);
 
 passButton.addEventListener("click", () => {
   deck.pass();
@@ -78,22 +63,6 @@ previousCardsAsideButton.addEventListener("click", () => {
   togglePreviousCardsAsideOpened();
 });
 
-voiceButton.addEventListener("click", () => {
-  updateVoiceSpeechActive();
-});
-
-languageSelector.addEventListener("change", () => {
-  language = languageSelector.value;
-  localStorage.setItem("languageSelected", language);
-  deck.setLanguage(language);
-});
-
-dekcSelector.addEventListener("change", () => {
-  deckType = dekcSelector.value;
-  localStorage.setItem("deckSelected", deckType);
-  deck.setType(deckType);
-});
-
 const setAutoPass = async (value) => {
   autoPass = value;
   if (autoPass) {
@@ -126,7 +95,7 @@ const toggleMenuOpened = () => {
     menuButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
     return;
   }
-  
+
   menuContainer.classList.remove("opened");
   menuButton.innerHTML = `<i class="fa-solid fa-sliders"></i>`;
 };
@@ -138,38 +107,10 @@ const togglePreviousCardsAsideOpened = () => {
     previousCardsAsideButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
     return;
   }
-  
+
   previousCardsAside.classList.remove("opened");
   previousCardsAsideButton.innerHTML = `<img src="assets/cards-icon.svg" alt="cards icon">`;
-}
-
-const updateVoiceSpeechActive = () => {
-  isVoiceActive = voiceButton.checked;
-  localStorage.setItem("voiceSpeechActive", isVoiceActive);
 };
 
-const setInitialVoiceSpeech = () => {
-  isVoiceActive = (localStorage.getItem("voiceSpeechActive") ?? "true") === "true";
-  voiceButton.checked = isVoiceActive;
-};
 
-const setInitialLanguage = () => {
-  language = localStorage.getItem("languageSelected") ?? language;
-  languageSelector.value = language;
-  deck.setLanguage(language);
-}
-
-const setInitialDeck = () => {
-  deckType = localStorage.getItem("deckSelected") ?? deckType;
-  dekcSelector.value = deckType;
-  deck.setType(deckType);
-}
-
-const setInitialOptions = () => {
-  setInitialVoiceSpeech();
-  setInitialLanguage();
-  setInitialDeck();
-};
-
-// Execute initial methods
-setInitialOptions();
+const menu = new Menu(deck.setLanguage, deck.setType);

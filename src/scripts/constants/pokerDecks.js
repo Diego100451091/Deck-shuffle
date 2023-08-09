@@ -374,14 +374,14 @@ const jokerCards = [
       en: "Black joker",
       es: "Joker negro",
     },
-    image: "pokerDeck/black-joker.jpg",
+    image: "pokerDeck/black_joker.jpg",
   },
   {
     name: {
       en: "Red joker",
       es: "Joker rojo",
     },
-    image: "pokerDeck/red-joker.jpg",
+    image: "pokerDeck/red_joker.jpg",
   },
 ];
 
