@@ -35,7 +35,9 @@ class Deck {
       await this.speakText(newCard.name[this.language]);
       return true;
     } else {
-      await this.speakText(this.language == "es" ? "Baraja terminada" : "Deck finished");
+      await this.speakText(
+        this.language == "es" ? "Baraja terminada" : "Deck finished"
+      );
       return false;
     }
   };
@@ -55,13 +57,13 @@ class Deck {
       setTimeout(() => {
         currentCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
         setTimeout(() => {
-          currentCard.src = `assets/${this.currentCard.image}`;
+          currentCard.src = `src/assets/${this.currentCard.image}`;
           currentCard.style.transition = ""; // Reset the transition property after the animation
           currentCard.style.transform = ""; // Reset the transform to its original position
           currentCard.style.opacity = "1";
 
           if (this.passedCards.length > 1) {
-            previousCard.src = `assets/${
+            previousCard.src = `src/assets/${
               this.passedCards[this.passedCards.length - 1].image
             }`;
             previousCard.style.opacity = "1";
@@ -89,7 +91,7 @@ class Deck {
     for (let i = 0; i < this.leftCardsCounter; i++) {
       const offset = -i / 3;
       const cardReverseItem = document.createElement("img");
-      cardReverseItem.src = `assets/${decksDict[this.type].reverse}`;
+      cardReverseItem.src = `src/assets/${decksDict[this.type].reverse}`;
       cardReverseItem.alt = "reverse-card";
       cardReverseItem.style = `transform: translateX(${offset}px) translateY(${offset}px)`;
       cardReverseItem.key = `reverse-card-${i}`;
@@ -121,7 +123,7 @@ class Deck {
     );
     const cardItem = document.createElement("img");
     cardItem.classList = "small-previous-card";
-    cardItem.src = `assets/${card.image}`;
+    cardItem.src = `src/assets/${card.image}`;
     cardItem.alt = card.name[this.language];
     cardItem.key = `card-${card.name[this.language]}`;
     previousCardsContainer.appendChild(cardItem);
