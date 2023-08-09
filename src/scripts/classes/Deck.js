@@ -10,7 +10,7 @@ export class Deck {
     this.languaje = languaje;
     this.speakText = speakText;
 
-    this.render();
+    this.renderMainCards();
   }
 
   suffle = (deck) => {
@@ -27,10 +27,11 @@ export class Deck {
   pass = async () => {
     const newCard = this.cards.pop();
     if (newCard) {
+      this.appendCardToHistory(newCard);
       this.passedCards.push(this.currentCard);
       this.currentCard = newCard;
       this.leftCardsCounter -= 1;
-      this.render();
+      this.renderMainCards();
       await this.speakText(newCard.name[this.languaje]);
       return true;
     } else {
@@ -38,7 +39,7 @@ export class Deck {
     }
   };
 
-  render = () => {
+  renderMainCards = () => {
     const previousCard = document.querySelector("#previous-card");
     const currentCard = document.querySelector("#current-card");
 
@@ -64,7 +65,6 @@ export class Deck {
               }`;
             previousCard.style.opacity = "1";
           } else {
-            console.log("try")
             previousCard.style.opacity = "0";
           }
         }, 500); // Set the same duration as the transition (in milliseconds)
@@ -114,9 +114,25 @@ export class Deck {
     this._renderLeftDeck();
   }
 
+  appendCardToHistory = (card) =>{
+    const previousCardsContainer = document.querySelector("#previous-cards-list");
+    const cardItem = document.createElement("img");
+    cardItem.classList = "small-previous-card"
+    cardItem.src = `assets/${card.image}`;
+    cardItem.alt = card.name[this.languaje];
+    cardItem.key = `card-${card.name[this.languaje]}`;
+    previousCardsContainer.appendChild(cardItem);
+  }
+
+  cleanPassedCards = () => {
+    const previousCardsContainer = document.querySelector("#previous-cards-list");
+    previousCardsContainer.innerHTML = "";
+  }
+
   reset = () => {
     this.cards = this.suffle(decksDict[this.type].list);
     this.passedCards = [];
+    this.cleanPassedCards();
     this.currentCard = null;
     this.leftCardsCounter = this.cards.length;
     this.cleanRender();

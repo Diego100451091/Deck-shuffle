@@ -14,45 +14,54 @@
 
 <body class="green-background-pattern">
     <header>
+        <button id="previous-cards-button">
+            <img src="assets/cards-icon.svg" alt="cards icon">
+        </button>
         <h1>Deck shuffle</h1>
         <button id="menu-button">
             <i class="fa-solid fa-sliders"></i>
         </button>
-        <aside id="options-menu">
-            <ul>
-                <li class="menu-option">
-                    <h3>Deck type: </h3>
-                    <select id="deck-selector">
-                        <option value="spanish" selected>Spanish</option>
-                    </select>
-                </li>
-                <li class="menu-option">
-                    <h3>Theme:</h3>
-                    <form id="color-theme-selector">
-                        <div class="color-theme-option">
-                            <label for="color-theme-green">Green</label>
-                            <input id="color-theme-green" type="radio" name="theme" value="green" checked>
-                        </div>
-                        <div class="color-theme-option">
-                            <label for="color-theme-blue">Blue</label>
-                            <input id="color-theme-blue" type="radio" name="theme" value="blue">
-                        </div>
-                        <div class="color-theme-option">
-                            <label for="color-theme-magenta">Magenta</label>
-                            <input id="color-theme-magenta" type="radio" name="theme" value="magenta">
-                    </form>
-                </li>
-                <li class="menu-option">
-                    <h3>Voice speech:</h3>
-                    <div id="voice-speech-input-container">
-                        <label>Disabled</label>
-                        <input type="checkbox" id="voice-speech-input" class="rounded-slider-checkbox">
-                        <label>Enabled</label>
-                    </div>
-                </li>
-            </ul>
-        </aside>
+        
     </header>
+    <aside id="previous-cards-aside">
+        <h2>Previous cards showed</h2>
+        <ul id="previous-cards-list">
+        </ul>
+    </aside>
+    <aside id="options-menu">
+        <ul>
+            <li class="menu-option">
+                <h3>Deck type: </h3>
+                <select id="deck-selector">
+                    <option value="spanish" selected>Spanish</option>
+                </select>
+            </li>
+            <li class="menu-option">
+                <h3>Theme:</h3>
+                <form id="color-theme-selector">
+                    <div class="color-theme-option">
+                        <label for="color-theme-green">Green</label>
+                        <input id="color-theme-green" type="radio" name="theme" value="green" checked>
+                    </div>
+                    <div class="color-theme-option">
+                        <label for="color-theme-blue">Blue</label>
+                        <input id="color-theme-blue" type="radio" name="theme" value="blue">
+                    </div>
+                    <div class="color-theme-option">
+                        <label for="color-theme-magenta">Magenta</label>
+                        <input id="color-theme-magenta" type="radio" name="theme" value="magenta">
+                </form>
+            </li>
+            <li class="menu-option">
+                <h3>Voice speech:</h3>
+                <div id="voice-speech-input-container">
+                    <label>Disabled</label>
+                    <input type="checkbox" id="voice-speech-input" class="rounded-slider-checkbox">
+                    <label>Enabled</label>
+                </div>
+            </li>
+        </ul>
+    </aside>
 
     <main id="main">
         <section id="deck-section">

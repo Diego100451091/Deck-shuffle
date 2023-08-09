@@ -20,6 +20,7 @@ let autoPass = false;
 let autoPassPeriod = 2000;
 let intervalAutoPassId = null;
 let isMenuOpened = false;
+let isPreviousCardsMenuOpened = false;
 
 const restartButton = document.querySelector("#restart-button");
 const passButton = document.querySelector("#pass-button");
@@ -34,6 +35,9 @@ const plusButton = inputContainer.querySelector(".plus-button");
 const menuButton = document.querySelector("#menu-button");
 const menuContainer = document.querySelector("#options-menu");
 const voiceButton = document.querySelector("#voice-speech-input");
+
+const previousCardsAsideButton = document.querySelector("#previous-cards-button")
+const previousCardsAside = document.querySelector("#previous-cards-aside");
 
 const deck = new Deck(deckType, languaje, speakText);
 
@@ -64,10 +68,12 @@ autoPassIntervalInput.addEventListener("change", () => {
   updateAutoPassPeriod();
 });
 
-
-
 menuButton.addEventListener("click", () => {
   toggleMenuOpened();
+});
+
+previousCardsAsideButton.addEventListener("click", () => {
+  togglePreviousCardsAsideOpened();
 });
 
 voiceButton.addEventListener("click", () => {
@@ -99,7 +105,6 @@ const updateAutoPassPeriod = () => {
   }
 };
 
-
 const toggleMenuOpened = () => {
   isMenuOpened = !isMenuOpened;
   if (isMenuOpened) {
@@ -111,6 +116,20 @@ const toggleMenuOpened = () => {
   menuContainer.classList.remove("opened");
   menuButton.innerHTML = `<i class="fa-solid fa-sliders"></i>`;
 };
+
+const togglePreviousCardsAsideOpened = () => {
+  isPreviousCardsMenuOpened = !isPreviousCardsMenuOpened;
+  if (isPreviousCardsMenuOpened) {
+    previousCardsAside.classList.add("opened");
+    previousCardsAsideButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    return;
+  }
+  
+  previousCardsAside.classList.remove("opened");
+  previousCardsAsideButton.innerHTML = `<img src="assets/cards-icon.svg" alt="cards icon">`;
+}
+
+
 
 const updateVoiceSpeechActive = () => {
   isVoiceActive = voiceButton.checked;
