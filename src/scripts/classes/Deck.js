@@ -93,6 +93,11 @@ export class Deck {
       cardReverseItem.style = `transform: translateX(${offset}px) translateY(${offset}px)`;
       cardReverseItem.key = `reverse-card-${i}`;
       leftCardsContainer.appendChild(cardReverseItem);
+
+      if (i === this.leftCardsCounter - 1) {
+        cardReverseItem.id = "last-reverse-card";
+        cardReverseItem.addEventListener("click", () => this.pass())
+      }
     }
   }
 
