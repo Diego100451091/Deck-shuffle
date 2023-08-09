@@ -1,13 +1,13 @@
 import { decksDict } from "../constants/constants.js";
 
 export class Deck {
-  constructor(type, languaje, speakText) {
+  constructor(type, language, speakText) {
     this.cards = this.suffle(decksDict[type].list);
     this.leftCardsCounter = this.cards.length;
     this.passedCards = [];
     this.currentCard = null;
     this.type = type;
-    this.languaje = languaje;
+    this.language = language;
     this.speakText = speakText;
 
     this.renderMainCards();
@@ -32,7 +32,7 @@ export class Deck {
       this.currentCard = newCard;
       this.leftCardsCounter -= 1;
       this.renderMainCards();
-      await this.speakText(newCard.name[this.languaje]);
+      await this.speakText(newCard.name[this.language]);
       return true;
     } else {
       return false;
@@ -119,8 +119,8 @@ export class Deck {
     const cardItem = document.createElement("img");
     cardItem.classList = "small-previous-card"
     cardItem.src = `assets/${card.image}`;
-    cardItem.alt = card.name[this.languaje];
-    cardItem.key = `card-${card.name[this.languaje]}`;
+    cardItem.alt = card.name[this.language];
+    cardItem.key = `card-${card.name[this.language]}`;
     previousCardsContainer.appendChild(cardItem);
   }
 
@@ -138,8 +138,8 @@ export class Deck {
     this.cleanRender();
   };
 
-  setLanguaje = (languaje) => {
-    this.languaje = languaje;
+  setLanguage = (language) => {
+    this.language = language;
   };
 
   setType = (type) => {

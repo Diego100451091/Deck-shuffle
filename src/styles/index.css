@@ -371,7 +371,7 @@ aside{
   gap: 0.5rem;
 }
 
-#deck-selector {
+.selector-input {
   border-radius: .5rem;
   border: 2px solid var(--dark-primary-color);
   background-color: var(--primary-color);

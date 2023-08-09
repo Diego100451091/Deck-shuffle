@@ -14,7 +14,7 @@ const speakText = (text) => {
   }
 };
 
-let languaje = "es";
+let language = "es";
 let deckType = "spanish";
 let autoPass = false;
 let autoPassPeriod = 2000;
@@ -35,11 +35,12 @@ const plusButton = inputContainer.querySelector(".plus-button");
 const menuButton = document.querySelector("#menu-button");
 const menuContainer = document.querySelector("#options-menu");
 const voiceButton = document.querySelector("#voice-speech-input");
+const languageSelector = document.querySelector("#language-selector");
 
 const previousCardsAsideButton = document.querySelector("#previous-cards-button")
 const previousCardsAside = document.querySelector("#previous-cards-aside");
 
-const deck = new Deck(deckType, languaje, speakText);
+const deck = new Deck(deckType, language, speakText);
 
 passButton.addEventListener("click", () => {
   deck.pass();
@@ -79,6 +80,11 @@ previousCardsAsideButton.addEventListener("click", () => {
 voiceButton.addEventListener("click", () => {
   updateVoiceSpeechActive();
 });
+
+languageSelector.addEventListener("change", () => {
+  language = languageSelector.value;
+  deck.setLanguage(language);
+})
 
 const setAutoPass = async (value) => {
   autoPass = value;
