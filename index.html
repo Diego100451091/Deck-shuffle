@@ -6,8 +6,8 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
     <title>DeckFlow</title>
-    <link rel="icon" href="assets/cards-icon.svg">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="icon" href="./src/assets/cards-icon.svg">
+    <link rel="stylesheet" href="./src/styles/index.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -15,13 +15,13 @@
 <body class="green-background-pattern">
     <header>
         <button id="previous-cards-button">
-            <img src="assets/cards-icon.svg" alt="cards icon">
+            <img src="./src/assets/cards-icon.svg" alt="cards icon">
         </button>
         <h1>DeckFlow</h1>
         <button id="menu-button">
             <i class="fa-solid fa-sliders"></i>
         </button>
-        
+
     </header>
     <aside id="previous-cards-aside">
         <h2>Previous cards showed</h2>
@@ -43,8 +43,10 @@
                     <option value="spanish" selected>Spanish</option>
                     <option value="poker40">Poker 40 cards</option>
                     <option value="poker52">Poker 52 cards</option>
-                    <option value="poker40joker">Poker 40 cards with jokers</option>
-                    <option value="poker52joker">Poker 52 cards with jokers</option>
+                    <option value="poker40joker">Poker 40 cards with
+                        jokers</option>
+                    <option value="poker52joker">Poker 52 cards with
+                        jokers</option>
                 </select>
             </li>
             <li class="menu-option">
@@ -52,22 +54,27 @@
                 <form id="color-theme-selector">
                     <div class="color-theme-option">
                         <label for="color-theme-green">Green</label>
-                        <input id="color-theme-green" type="radio" name="theme" value="green" checked>
+                        <input id="color-theme-green" type="radio"
+                            name="theme" value="green" checked>
                     </div>
                     <div class="color-theme-option">
                         <label for="color-theme-blue">Blue</label>
-                        <input id="color-theme-blue" type="radio" name="theme" value="blue">
+                        <input id="color-theme-blue" type="radio"
+                            name="theme" value="blue">
                     </div>
                     <div class="color-theme-option">
-                        <label for="color-theme-magenta">Magenta</label>
-                        <input id="color-theme-magenta" type="radio" name="theme" value="magenta">
+                        <label
+                            for="color-theme-magenta">Magenta</label>
+                        <input id="color-theme-magenta" type="radio"
+                            name="theme" value="magenta">
                 </form>
             </li>
             <li class="menu-option">
                 <h3>Voice speech:</h3>
                 <div id="voice-speech-input-container">
                     <label>Disabled</label>
-                    <input type="checkbox" id="voice-speech-input" class="rounded-slider-checkbox">
+                    <input type="checkbox" id="voice-speech-input"
+                        class="rounded-slider-checkbox">
                     <label>Enabled</label>
                 </div>
             </li>
@@ -101,42 +108,34 @@
                 Start auto pass
             </button>
             <div id="auto-pass-interval-selector">
-                <label for="auto-pass-interval-input">Auto pass interval
+                <label for="auto-pass-interval-input">Auto pass
+                    interval
                     (seg)</label>
                 <div class="auto-pass-input-container">
-                  <button
-                    type="button"
-                    class="minus-button transition hover:opacity-75"
-                  >
-                    <i class="fa-solid fa-minus"></i>
-                  </button>
-                  <input type="number" id="auto-pass-interval-input"
-                    value="2.0" step="0.5" min="2.0" max="5.0"
-                    oninput="this.value = Math.round(this.value*10 / 5)/2"
-                    disabled
-                   >
-              
-                  <button
-                    type="button"
-                    class="plus-button w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                  >
-                  <i class="fa-solid fa-plus"></i>
-                  </button>
+                    <button type="button"
+                        class="minus-button transition hover:opacity-75">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <input type="number" id="auto-pass-interval-input"
+                        value="2.0" step="0.5" min="2.0" max="5.0"
+                        oninput="this.value = Math.round(this.value*10 / 5)/2"
+                        disabled>
+
+                    <button type="button"
+                        class="plus-button w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
-              </div>
-              <button id="pass-button" class="action-button">
+            </div>
+            <button id="pass-button" class="action-button">
                 Pass
             </button>
             <button id="restart-button" class="action-button">
                 Restart
             </button>
-            
-            
-
-            
         </section>
     </main>
-    <script src="./scripts/index.js" type="module"></script>
+    <script src="./src/scripts/index.js" type="module"></script>
 </body>
 
 </html>
