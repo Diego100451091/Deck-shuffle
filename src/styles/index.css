@@ -491,21 +491,42 @@ header > button > i {
   height: calc(var(--card-height) + 2rem);
 }
 
-#showed-cards > .card-container:first-child {
+.card-container {
+  position: relative;
+
+  width: var(--card-width);
+  height: var(--card-height);
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 0;
+  background-color: transparent;
+}
+
+.card-container:has(img[src=""]) {
+  border: 3px dashed var(--color-card-container);
+  background-color: var(--palette-white-transparency);
+}
+
+.card-container:first-child {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
 }
 
-#showed-cards > .card-container:nth-child(2) {
+.card-container:nth-child(2) {
   position: absolute;
   top: 2rem;
   left: 2rem;
   z-index: 2;
 }
 
-#showed-cards > .card-container:nth-child(2)::before {
+.card-container:nth-child(2)::before {
   content: "+";
   position: absolute;
   top: 50%;
@@ -515,26 +536,10 @@ header > button > i {
   color: var(--color-card-container);
 }
 
-.card-container {
-  position: relative;
-
-  width: var(--card-width);
-  height: var(--card-height);
-
-  border-radius: 10px;
-  border: 3px dashed var(--color-card-container);
-  background-color: var(--palette-white-transparency);
-}
-
 .card-container > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-
   width: 100%;
-  height: 100%;
 
-  border-radius: 10px;
+  border-radius: 1rem;
   object-fit: contain;
 
   opacity: 0;
@@ -559,8 +564,9 @@ header > button > i {
   width: var(--card-width);
   height: var(--card-height);
 
-  border-radius: 10px;
-}
+  border-radius: 1.1rem;
+  transform-origin: center;
+} 
 
 /*#endregion*/
 

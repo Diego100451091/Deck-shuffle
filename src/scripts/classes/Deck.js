@@ -45,21 +45,19 @@ class Deck {
   renderMainCards = () => {
     const previousCard = document.querySelector("#previous-card");
     const currentCard = document.querySelector("#current-card");
+    const currentCardContainer = currentCard.parentNode;
 
     if (this.currentCard) {
-      currentCard.style.transition = "transform 0.4s"; // Add transition CSS property
-      const previousCardPos = previousCard.getBoundingClientRect();
-      const currentCardPos = currentCard.getBoundingClientRect();
-      const deltaX = previousCardPos.left - currentCardPos.left;
-      const deltaY = previousCardPos.top - currentCardPos.top;
-
       // Use setTimeout to update the current card after the animation
       setTimeout(() => {
-        currentCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+        if (this.passedCards.length > 1){
+          currentCardContainer.style.transition = "all .5s"; // Add transition CSS property
+          currentCardContainer.style.transform = `translate(-2rem, -2rem)`;
+        }
         setTimeout(() => {
           currentCard.src = `src/assets/${this.currentCard.image}`;
-          currentCard.style.transition = ""; // Reset the transition property after the animation
-          currentCard.style.transform = ""; // Reset the transform to its original position
+          currentCardContainer.style.transition = ""; // Reset the transition property after the animation
+          currentCardContainer.style.transform = ""; // Reset the transform to its original position
           currentCard.style.opacity = "1";
 
           if (this.passedCards.length > 1) {
@@ -111,7 +109,9 @@ class Deck {
       "#remaining-cards-counter-number"
     );
 
+    previousCard.src = "";
     previousCard.style.opacity = "0";
+    currentCard.src = "";
     currentCard.style.opacity = "0";
     leftCardsCounterSpan.innerHTML = this.leftCardsCounter;
     this._renderLeftDeck();
