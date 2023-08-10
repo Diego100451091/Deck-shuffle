@@ -81,6 +81,9 @@ class Menu {
     // Update the background
     document.body.classList = `${selectedTheme}-background-pattern`;
 
+    // Update the page logo
+    document.querySelector("#page-logo").href = `src/assets/${selectedTheme}-cards-icon.svg`;
+
     // Save value into localStorage
     localStorage.setItem("theme", selectedTheme);
     // Set the theme variable to the new theme
