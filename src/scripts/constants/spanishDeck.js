@@ -1,4 +1,4 @@
-const spanishDeck = [
+export const spanishDeck40 = [
   {
     name: {
       en: "Ace of gold",
@@ -281,4 +281,61 @@ const spanishDeck = [
   },
 ];
 
-export default spanishDeck;
+export const spanishDeck48 = spanishDeck40.concat([
+  {
+    name: {
+      en: "Eight of gold",
+      es: "Ocho de oros",
+    },
+    image: "spanishDeck/eight-gold.png",
+  },
+  {
+    name: {
+      en: "Nine of gold",
+      es: "Nueve de oros",
+    },
+    image: "spanishDeck/nine-gold.png",
+  },
+  {
+    name: {
+      en: "Eight of cups",
+      es: "Ocho de copas",
+    },
+    image: "spanishDeck/eight-cups.png",
+  },
+  {
+    name: {
+      en: "Nine of cups",
+      es: "Nueve de copas",
+    },
+    image: "spanishDeck/nine-cups.png",
+  },
+  {
+    name: {
+      en: "Eight of swords",
+      es: "Ocho de espadas",
+    },
+    image: "spanishDeck/eight-swords.png",
+  },
+  {
+    name: {
+      en: "Nine of swords",
+      es: "Nueve de espadas",
+    },
+    image: "spanishDeck/nine-swords.png",
+  },
+  {
+    name: {
+      en: "Eight of clubs",
+      es: "Ocho de bastos",
+    },
+    image: "spanishDeck/eight-clubs.png",
+  },
+  {
+    name: {
+      en: "Nine of clubs",
+      es: "Nueve de bastos",
+    },
+    image: "spanishDeck/nine-clubs.png",
+  },
+]);

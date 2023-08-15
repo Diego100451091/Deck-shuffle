@@ -1,4 +1,4 @@
-import spanishDeck from "./spanishDeck.js";
+import { spanishDeck40, spanishDeck48 } from "./spanishDeck.js";
 import {
   poker40Deck,
   poker52Deck,
@@ -7,8 +7,12 @@ import {
 } from "./pokerDecks.js";
 
 const decksDict = {
-  spanish: {
-    list: spanishDeck,
+  spanish40: {
+    list: spanishDeck40,
+    reverse: "spanishDeck/reverse.jpg",
+  },
+  spanish48: {
+    list: spanishDeck48,
     reverse: "spanishDeck/reverse.jpg",
   },
   poker40: {

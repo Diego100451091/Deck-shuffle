@@ -46,7 +46,7 @@ class Menu {
   };
 
   _setInitialDeck = () => {
-    const deckType = localStorage.getItem("deckSelected") ?? "spanish";
+    const deckType = localStorage.getItem("deckSelected") ?? "spanish40";
     document.querySelector("#deck-selector").value = deckType;
     this.callbackDeckChange(deckType);
     return deckType;

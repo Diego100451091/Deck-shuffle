@@ -26,7 +26,7 @@ const previousCardsAsideButton = document.querySelector(
 );
 const previousCardsAside = document.querySelector("#previous-cards-aside");
 
-const deck = new Deck("spanish", "es", voiceSpeech.speakText);
+const deck = new Deck("spanish40", "es", voiceSpeech.speakText);
 
 passButton.addEventListener("click", () => {
   deck.pass();
